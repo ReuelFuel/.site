@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spiritual Food — Reuel Fuel</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --ink: #1a1a18;
+            --ink-muted: #6b6b66;
+            --ink-faint: #a8a89f;
+            --surface: #ffffff;
+            --surface-card: #ffffff;
+            --border: rgba(26,26,24,0.1);
+            --accent: #1D9E75;
+            --accent-light: #E1F5EE;
+            --accent-dark: #085041;
+        }
+
+        body {
+            font-family: 'EB Garamond', serif;
+            font-size: 16px;
+            line-height: 1.7;
+            background: var(--surface);
+            color: var(--ink);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(250,249,246,0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            padding: 0 2rem;
+        }
+
+        .nav-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 60px;
+        }
+
+        .nav-logo {
+            font-family: 'EB Garamond', serif;
+            font-size: 1.2rem;
+            color: var(--ink);
+            text-decoration: none;
+            letter-spacing: -0.01em;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 0.25rem;
+        }
+
+        .nav-links a {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--ink-muted);
+            text-decoration: none;
+            padding: 0.4rem 0.75rem;
+            border-radius: 6px;
+            transition: background 0.15s, color 0.15s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            background: var(--accent-light);
+            color: var(--accent);
+        }
+
+        .page-header {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 5rem 2rem 4rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .page-tag {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--accent);
+            background: var(--accent-light);
+            padding: 0.3rem 0.75rem;
+            border-radius: 100px;
+            margin-bottom: 1.25rem;
+        }
+
+        .page-header h1 {
+            font-family: 'EB Garamond', serif;
+            font-size: clamp(2.2rem, 5vw, 3.5rem);
+            font-weight: 400;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            color: var(--ink);
+            margin-bottom: 1.25rem;
+        }
+
+        .page-header h1 em {
+            font-style: normal;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .page-intro {
+            font-size: 1.05rem;
+            color: var(--ink-muted);
+            max-width: 580px;
+            line-height: 1.7;
+        }
+
+        /* ── Blog listing ── */
+        .posts-wrap {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem 4rem;
+        }
+
+        .posts-header {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            padding: 2.5rem 0 1.5rem;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 0;
+        }
+
+        .posts-header-label {
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--ink-faint);
+        }
+
+        .post-count {
+            font-size: 0.8rem;
+            color: var(--ink-faint);
+        }
+
+        /* Featured post — full width */
+        .post-featured {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 2rem;
+            text-decoration: none;
+            color: inherit;
+            transition: background 0.15s, border-color 0.15s;
+        }
+
+        .post-featured:hover { background: rgba(83,74,183,0.03); border-color: var(--accent); }
+
+        .post-featured-body {
+            padding: 2.5rem;
+        }
+
+
+        .post-featured-visual {
+            background: var(--accent-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            font-family: 'EB Garamond', serif;
+            font-style: normal;
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: var(--accent-dark);
+            text-align: center;
+            line-height: 1.5;
+            border-left: 1px solid var(--border);
+        }
+
+        /* Regular post card */
+        .post-card {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            align-items: start;
+            gap: 2rem;
+            padding: 2rem 0;
+            border-bottom: 1px solid var(--border);
+            text-decoration: none;
+            color: inherit;
+            transition: background 0.15s;
+        }
+
+        .post-card:hover .post-title { color: var(--accent); }
+
+        .post-meta {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.6rem;
+        }
+
+        .post-tag {
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--accent);
+            background: var(--accent-light);
+            padding: 0.2rem 0.6rem;
+            border-radius: 100px;
+        }
+
+        .post-date {
+            font-size: 0.8rem;
+            color: var(--ink-faint);
+        }
+
+        .post-title {
+            font-family: 'EB Garamond', serif;
+            font-size: 1.35rem;
+            font-weight: 400;
+            line-height: 1.25;
+            color: var(--ink);
+            margin-bottom: 0.6rem;
+            transition: color 0.15s;
+        }
+
+        .post-featured .post-title {
+            font-size: 1.75rem;
+        }
+
+        .post-excerpt {
+            font-size: 0.925rem;
+            color: var(--ink-muted);
+            line-height: 1.65;
+        }
+
+        .post-read-time {
+            font-size: 0.78rem;
+            color: var(--ink-faint);
+            white-space: nowrap;
+            padding-top: 0.35rem;
+        }
+
+        .scripture-pill {
+            display: inline-block;
+            font-size: 0.75rem;
+            color: var(--accent-dark);
+            background: var(--accent-light);
+            border-left: 2px solid var(--accent);
+            padding: 0.3rem 0.75rem;
+            border-radius: 0 4px 4px 0;
+            margin-top: 0.75rem;
+            font-style: normal;
+            font-weight: 700;
+        }
+
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 2.5rem 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-name {
+            font-family: 'EB Garamond', serif;
+            font-size: 1rem;
+            color: var(--ink);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 1.1rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .footer-links a {
+            display: flex;
+            align-items: center;
+            color: var(--ink-muted);
+            text-decoration: none;
+        }
+
+        .footer-links a svg {
+            width: 19px;
+            height: 19px;
+        }
+
+        .footer-links a:hover { color: var(--accent); }
+
+        @media (max-width: 640px) {
+            nav { padding: 0 1.25rem; }
+            .page-header { padding: 3rem 1.25rem; }
+            .posts-wrap { padding: 0 1.25rem 3rem; }
+            .post-featured { grid-template-columns: 1fr; }
+            .post-featured-visual { display: none; }
+            .post-featured-body { padding: 1.75rem; }
+            .post-card { grid-template-columns: 1fr; gap: 0.25rem; }
+            .post-read-time { display: none; }
+            footer { padding: 2rem 1.25rem; flex-direction: column; align-items: flex-start; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-inner">
+            <a href="index.html" class="nav-logo">Reuel Fuel</a>
+            <ul class="nav-links">
+                <li><a href="spiritual-food.html" class="active">Spiritual food</a></li>
+                <li><a href="physical-food.html">Physical food</a></li>
+                <li><a href="about.html">About me</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <h1>Food for the <em>spirit</em></h1>
+        <p class="page-intro">'He humbled you, causing you to hunger and then feeding you with manna, which neither you nor your ancestors had known, to teach you that man does not live on bread alone but on every word that comes from the mouth of the Lord.' Deuteronomy 8:3</p>
+    </div>
+
+    <div class="posts-wrap">
+
+        <div class="posts-header">
+            <span class="posts-header-label">All posts</span>
+            <span class="post-count">2 articles</span>
+        </div>
+
+        <!-- Featured post -->
+        <a href="#" class="post-featured">
+            <div class="post-featured-body">
+                <div class="post-meta">
+                    <span class="post-tag">Foundation</span>
+                    <span class="post-date">June 2025</span>
+                </div>
+                <h2 class="post-title">In the thickness of night</h2>
+                <p class="post-excerpt">Jacob wrestled the stranger for hours, thinking into be a man</p>
+                <span class="scripture-pill">'So Jacob was left alone, and a man wrestled with him till daybreak. Genesis 32:24</span>
+            </div>
+            <span class="post-read-time">3 min read</span>
+
+        <!--
+            <div class="post-featured-visual">
+                In Him was life<br>and that life was the light of all mankind<br><br>
+                <small style="font-size:0.8rem; opacity:0.7; font-style:normal;">John 1:4</small>
+            </div> -->
+        </a>
+
+
+        <a href="posts\The perfect timing of the Messiah.html" class="post-card">
+            <div>
+                <div class="post-meta">
+                    <span class="post-tag">Prophecy</span>
+                    <span class="post-date">July 2026</span>
+                </div>
+                <h2 class="post-title">The prophetic timing of the messiah</h2>
+                <p class="post-excerpt">And he shall confirm the covenant with many for one week: and in the midst of the week he shall cause the sacrifice and the oblation to cease, </p>
+                <span class="scripture-pill">"For forty years — one year for each of the forty days you explored the land" Numbers 14:24</span>
+            </div>
+            <span class="post-read-time">5 min read</span>
+        </a>
+
+        <!-- 
+        Post 3 
+        <a href="#" class="post-card">
+            <div>
+                <div class="post-meta">
+                    <span class="post-tag">Growth</span>
+                    <span class="post-date">April 2025</span>
+                </div>
+                <h2 class="post-title">From milk to solid food: spiritual maturity in Hebrews</h2>
+                <p class="post-excerpt">Scripture describes a progression in spiritual nourishment. New believers start on milk — the foundational truths of the faith. As we grow, we move toward solid food — the harder, richer teachings that require maturity to digest. What does that progression actually look like in practice?</p>
+                <span class="scripture-pill">"Solid food is for the mature." — Hebrews 5:14</span>
+            </div>
+            <span class="post-read-time">7 min read</span>
+        </a>
+
+         Post 4 
+        <a href="#" class="post-card">
+            <div>
+                <div class="post-meta">
+                    <span class="post-tag">Parable</span>
+                    <span class="post-date">March 2025</span>
+                </div>
+                <h2 class="post-title">The parable of the sower: four soils, one seed</h2>
+                <p class="post-excerpt">The parable of the sower is one of the few parables that Jesus explains himself. Four different soils receive the same seed and produce four completely different outcomes. The question isn't about the quality of the Word — it's about the condition of the ground receiving it.</p>
+                <span class="scripture-pill">"Still other seed fell on good soil." — Matthew 13:8</span>
+            </div>
+            <span class="post-read-time">8 min read</span>
+        </a> -->
+
+    </div>
+
+    <footer>
+        <span class="footer-name">Reuel Fuel</span>
+        <ul class="footer-links">
+            <li><a href="mailto:spiritualfood@reuelfuel.site" aria-label="Email" title="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></a></li>
+            <li><a href="https://www.instagram.com/reuel_fuel?igsh=N3k2dm92ZzY5ZnJn&utm_source=qr" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor" stroke="none"/></svg></a></li>
+            <li><a href="https://youtube.com/@reuelfuel?si=3wHM7sIx-K2yQduB" target="_blank" rel="noopener" aria-label="YouTube" title="YouTube"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="M10 9.3l5 2.7-5 2.7V9.3z" fill="currentColor" stroke="none"/></svg></a></li>
+        </ul>
+    </footer>
+
+</body>
+</html>

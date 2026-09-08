@@ -340,6 +340,25 @@
             nav { padding: 0 1.25rem; }
             footer { padding: 2rem 1.25rem; flex-direction: column; align-items: flex-start; }
         }
+
+        @media (max-width: 480px) {
+            .nav-inner {
+                grid-template-columns: 1fr;
+                justify-items: center;
+                height: auto;
+                padding: 0.75rem 0;
+                row-gap: 0.5rem;
+            }
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 0.35rem 0.4rem;
+            }
+            .nav-links a {
+                font-size: 0.8rem;
+                padding: 0.35rem 0.6rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -355,6 +374,10 @@
         </div>
     </nav>
 
+    <div class="page-header">
+        <p class="page-intro">'For we through the Spirit wait for the hope of righteousness by faith. For in Jesus Christ neither circumcision availeth any thing, nor uncircumcision; but faith which worketh by love. 'Galatians 5:5-6</p>
+    </div>
+ 
     <div class="content">
 
         <div class="content-section content-section-centered">

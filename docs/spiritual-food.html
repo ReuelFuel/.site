@@ -6,9 +6,11 @@
     <title>Spiritual Food — Reuel Fuel</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        h1, h2, h3 { text-align: center; text-transform: uppercase; }
 
         :root {
             --ink: #1a1a18;
@@ -23,7 +25,7 @@
         }
 
         body {
-            font-family: 'EB Garamond', serif;
+            font-family: 'Poppins', sans-serif;
             font-size: 16px;
             line-height: 1.7;
             background: var(--surface);
@@ -37,21 +39,20 @@
             z-index: 100;
             background: rgba(250,249,246,0.92);
             backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border);
             padding: 0 2rem;
         }
 
         .nav-inner {
             max-width: 1100px;
             margin: 0 auto;
-            display: flex;
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
             align-items: center;
-            justify-content: space-between;
             height: 60px;
         }
 
         .nav-logo {
-            font-family: 'EB Garamond', serif;
+            font-family: 'Poppins', sans-serif;
             font-size: 1.2rem;
             color: var(--ink);
             text-decoration: none;
@@ -83,7 +84,6 @@
             max-width: 1100px;
             margin: 0 auto;
             padding: 5rem 2rem 4rem;
-            border-bottom: 1px solid var(--border);
         }
 
         .page-tag {
@@ -100,9 +100,9 @@
         }
 
         .page-header h1 {
-            font-family: 'EB Garamond', serif;
+            font-family: 'Poppins', sans-serif;
             font-size: clamp(2.2rem, 5vw, 3.5rem);
-            font-weight: 400;
+            font-weight: 700;
             line-height: 1.1;
             letter-spacing: -0.02em;
             color: var(--ink);
@@ -118,7 +118,7 @@
         .page-intro {
             font-size: 1.05rem;
             color: var(--ink-muted);
-            max-width: 580px;
+            max-width: 680px;
             line-height: 1.7;
         }
 
@@ -134,8 +134,38 @@
             align-items: baseline;
             justify-content: space-between;
             padding: 2.5rem 0 1.5rem;
-            border-bottom: 1px solid var(--border);
             margin-bottom: 0;
+        }
+
+        .tag-filter {
+            display: flex;
+            gap: 1.5rem;
+            padding-bottom: 2rem;
+        }
+
+        .tag-filter-btn {
+            background: none;
+            border: none;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--ink-faint);
+            cursor: pointer;
+            padding: 0.15rem 0;
+            border-bottom: 2px solid transparent;
+            transition: color 0.15s, border-color 0.15s;
+        }
+
+        .tag-filter-btn:hover {
+            color: var(--ink);
+        }
+
+        .tag-filter-btn.active {
+            color: var(--accent);
+            font-weight: 700;
+            border-bottom-color: var(--accent);
         }
 
         .posts-header-label {
@@ -153,22 +183,19 @@
 
         /* Featured post — full width */
         .post-featured {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
+            display: block;
             gap: 0;
-            border: 1px solid var(--border);
-            border-radius: 10px;
             overflow: hidden;
             margin-bottom: 2rem;
             text-decoration: none;
             color: inherit;
-            transition: background 0.15s, border-color 0.15s;
+            transition: background 0.15s;
         }
 
-        .post-featured:hover { background: rgba(83,74,183,0.03); border-color: var(--accent); }
+        .post-featured:hover .post-title { color: #C9A227; }
 
         .post-featured-body {
-            padding: 2.5rem;
+            padding: 2rem 0;
         }
 
 
@@ -178,11 +205,11 @@
             align-items: center;
             justify-content: center;
             padding: 2rem;
-            font-family: 'EB Garamond', serif;
+            font-family: 'Poppins', sans-serif;
             font-style: normal;
             font-weight: 700;
             font-size: 1.05rem;
-            color: var(--accent-dark);
+            color: var(--ink);
             text-align: center;
             line-height: 1.5;
             border-left: 1px solid var(--border);
@@ -190,12 +217,8 @@
 
         /* Regular post card */
         .post-card {
-            display: grid;
-            grid-template-columns: 1fr auto;
-            align-items: start;
-            gap: 2rem;
+            display: block;
             padding: 2rem 0;
-            border-bottom: 1px solid var(--border);
             text-decoration: none;
             color: inherit;
             transition: background 0.15s;
@@ -206,19 +229,24 @@
         .post-meta {
             display: flex;
             align-items: center;
-            gap: 0.75rem;
+            justify-content: space-between;
             margin-bottom: 0.6rem;
         }
 
         .post-tag {
             font-size: 0.7rem;
-            font-weight: 500;
+            font-weight: 700;
             letter-spacing: 0.06em;
             text-transform: uppercase;
             color: var(--accent);
-            background: var(--accent-light);
-            padding: 0.2rem 0.6rem;
-            border-radius: 100px;
+        }
+
+        /* Date + read time, grouped together in the top-right corner of each card */
+        .post-corner-meta {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            white-space: nowrap;
         }
 
         .post-date {
@@ -226,12 +254,19 @@
             color: var(--ink-faint);
         }
 
+        .meta-dot {
+            font-size: 0.8rem;
+            color: var(--ink-faint);
+            opacity: 0.6;
+        }
+
         .post-title {
-            font-family: 'EB Garamond', serif;
+            font-family: 'Poppins', sans-serif;
             font-size: 1.35rem;
-            font-weight: 400;
+            font-weight: 700;
             line-height: 1.25;
             color: var(--ink);
+            text-align: center;
             margin-bottom: 0.6rem;
             transition: color 0.15s;
         }
@@ -250,26 +285,21 @@
             font-size: 0.78rem;
             color: var(--ink-faint);
             white-space: nowrap;
-            padding-top: 0.35rem;
         }
 
         .scripture-pill {
-            display: inline-block;
+            display: block;
             font-size: 0.75rem;
             color: var(--accent-dark);
-            background: var(--accent-light);
-            border-left: 2px solid var(--accent);
-            padding: 0.3rem 0.75rem;
-            border-radius: 0 4px 4px 0;
             margin-top: 0.75rem;
             font-style: normal;
             font-weight: 700;
+            text-align: center;
         }
 
         footer {
-            border-top: 1px solid var(--border);
             padding: 2.5rem 2rem;
-            max-width: 900px;
+            max-width: 1100px;
             margin: 0 auto;
             display: flex;
             align-items: center;
@@ -279,7 +309,7 @@
         }
 
         .footer-name {
-            font-family: 'EB Garamond', serif;
+            font-family: 'Poppins', sans-serif;
             font-size: 1rem;
             color: var(--ink);
         }
@@ -312,8 +342,7 @@
             .post-featured { grid-template-columns: 1fr; }
             .post-featured-visual { display: none; }
             .post-featured-body { padding: 1.75rem; }
-            .post-card { grid-template-columns: 1fr; gap: 0.25rem; }
-            .post-read-time { display: none; }
+            .post-corner-meta { font-size: 0.7rem; }
             footer { padding: 2rem 1.25rem; flex-direction: column; align-items: flex-start; }
         }
     </style>
@@ -332,8 +361,7 @@
     </nav>
 
     <div class="page-header">
-        <h1>Food for the <em>spirit</em></h1>
-        <p class="page-intro">'He humbled you, causing you to hunger and then feeding you with manna, which neither you nor your ancestors had known, to teach you that man does not live on bread alone but on every word that comes from the mouth of the Lord.' Deuteronomy 8:3</p>
+        <p class="page-intro">'Jesus said to them, “My food is to do the will of Him who sent Me, and to finish His work. ' John 4:34</p>
     </div>
 
     <div class="posts-wrap">
@@ -343,18 +371,27 @@
             <span class="post-count">2 articles</span>
         </div>
 
+        <div class="tag-filter">
+            <button class="tag-filter-btn active" data-filter="all">All</button>
+            <button class="tag-filter-btn" data-filter="Testimony">Testimony</button>
+            <button class="tag-filter-btn" data-filter="Prophecy">Prophecy</button>
+            <button class="tag-filter-btn" data-filter="Study">Study</button>
+        </div>
+
         <!-- Featured post -->
-        <a href="#" class="post-featured">
+        <a href="posts\preach-the-gospel.html" class="post-featured" data-tag="Testimony">
             <div class="post-featured-body">
                 <div class="post-meta">
-                    <span class="post-tag">Foundation</span>
-                    <span class="post-date">June 2025</span>
+                    <span class="post-tag">Testimony</span>
+                    <span class="post-corner-meta">
+                        <span class="post-date">June 2025</span>
+                        <span class="meta-dot">&middot;</span>
+                        <span class="post-read-time">5 min read</span>
+                    </span>
                 </div>
-                <h2 class="post-title">In the thickness of night</h2>
-                <p class="post-excerpt">Jacob wrestled the stranger for hours, thinking into be a man</p>
-                <span class="scripture-pill">'So Jacob was left alone, and a man wrestled with him till daybreak. Genesis 32:24</span>
+                <h2 class="post-title">Preach the Gospel!</h2>
+                <span class="scripture-pill">'And let us not be weary in well doing: for in due season we shall reap, if we faint not. ' Galatians 6:9</span>
             </div>
-            <span class="post-read-time">3 min read</span>
 
         <!--
             <div class="post-featured-visual">
@@ -364,46 +401,46 @@
         </a>
 
 
-        <a href="posts\The perfect timing of the Messiah.html" class="post-card">
-            <div>
-                <div class="post-meta">
-                    <span class="post-tag">Prophecy</span>
+        <a href="posts\The perfect timing of the Messiah.html" class="post-card" data-tag="Prophecy">
+            <div class="post-meta">
+                <span class="post-tag">Prophecy</span>
+                <span class="post-corner-meta">
                     <span class="post-date">July 2026</span>
-                </div>
-                <h2 class="post-title">The prophetic timing of the messiah</h2>
-                <p class="post-excerpt">And he shall confirm the covenant with many for one week: and in the midst of the week he shall cause the sacrifice and the oblation to cease, </p>
-                <span class="scripture-pill">"For forty years — one year for each of the forty days you explored the land" Numbers 14:24</span>
+                    <span class="meta-dot">&middot;</span>
+                    <span class="post-read-time">5 min read</span>
+                </span>
             </div>
-            <span class="post-read-time">5 min read</span>
+            <h2 class="post-title">The prophetic timing of the messiah</h2>
+            <span class="scripture-pill">"For forty years — one year for each of the forty days you explored the land" Numbers 14:24</span>
         </a>
 
         <!-- 
         Post 3 
         <a href="#" class="post-card">
-            <div>
-                <div class="post-meta">
-                    <span class="post-tag">Growth</span>
+            <div class="post-meta">
+                <span class="post-tag">Study</span>
+                <span class="post-corner-meta">
                     <span class="post-date">April 2025</span>
-                </div>
-                <h2 class="post-title">From milk to solid food: spiritual maturity in Hebrews</h2>
-                <p class="post-excerpt">Scripture describes a progression in spiritual nourishment. New believers start on milk — the foundational truths of the faith. As we grow, we move toward solid food — the harder, richer teachings that require maturity to digest. What does that progression actually look like in practice?</p>
-                <span class="scripture-pill">"Solid food is for the mature." — Hebrews 5:14</span>
+                    <span class="meta-dot">&middot;</span>
+                    <span class="post-read-time">7 min read</span>
+                </span>
             </div>
-            <span class="post-read-time">7 min read</span>
+            <h2 class="post-title">From milk to solid food: spiritual maturity in Hebrews</h2>
+            <span class="scripture-pill">"Solid food is for the mature." — Hebrews 5:14</span>
         </a>
 
          Post 4 
         <a href="#" class="post-card">
-            <div>
-                <div class="post-meta">
-                    <span class="post-tag">Parable</span>
+            <div class="post-meta">
+                <span class="post-tag">Study</span>
+                <span class="post-corner-meta">
                     <span class="post-date">March 2025</span>
-                </div>
-                <h2 class="post-title">The parable of the sower: four soils, one seed</h2>
-                <p class="post-excerpt">The parable of the sower is one of the few parables that Jesus explains himself. Four different soils receive the same seed and produce four completely different outcomes. The question isn't about the quality of the Word — it's about the condition of the ground receiving it.</p>
-                <span class="scripture-pill">"Still other seed fell on good soil." — Matthew 13:8</span>
+                    <span class="meta-dot">&middot;</span>
+                    <span class="post-read-time">8 min read</span>
+                </span>
             </div>
-            <span class="post-read-time">8 min read</span>
+            <h2 class="post-title">The parable of the sower: four soils, one seed</h2>
+            <span class="scripture-pill">"Still other seed fell on good soil." — Matthew 13:8</span>
         </a> -->
 
     </div>
@@ -416,6 +453,19 @@
             <li><a href="https://youtube.com/@reuelfuel?si=3wHM7sIx-K2yQduB" target="_blank" rel="noopener" aria-label="YouTube" title="YouTube"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="M10 9.3l5 2.7-5 2.7V9.3z" fill="currentColor" stroke="none"/></svg></a></li>
         </ul>
     </footer>
+
+    <script>
+        document.querySelectorAll('.tag-filter-btn').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                document.querySelectorAll('.tag-filter-btn').forEach(function (b) { b.classList.remove('active'); });
+                btn.classList.add('active');
+                var filter = btn.dataset.filter;
+                document.querySelectorAll('[data-tag]').forEach(function (post) {
+                    post.style.display = (filter === 'all' || post.dataset.tag === filter) ? '' : 'none';
+                });
+            });
+        });
+    </script>
 
 </body>
 </html>

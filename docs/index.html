@@ -727,7 +727,7 @@ Matthew 5:1-2
                 <h2>Sign up for Bible study</h2>
                 <p> The path of the righteous is like the morning sun, shining ever brighter till the full light of day (Proverbs 4:18) — Leave your details below and I'll see if I can arrange a time</p>
             </div>
-            <form class="signup-form" id="bible-study-form" action="mailto:spiritualfood@reuelfuel.site" method="post" enctype="text/plain">
+            <form class="signup-form" id="bible-study-form">
                 <div class="form-row">
                     <div>
                         <label for="bs-name">Name</label>
@@ -769,7 +769,16 @@ Matthew 5:1-2
     </footer>
 
     <script>
-        document.getElementById('bible-study-form').addEventListener('submit', function () {
+        document.getElementById('bible-study-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            var name = document.getElementById('bs-name').value.trim();
+            var email = document.getElementById('bs-email').value.trim();
+            var message = document.getElementById('bs-message').value.trim();
+            var subject = 'Bible study sign-up: ' + name;
+            var body = 'Name: ' + name + '\nEmail: ' + email + '\nMessage: ' + message;
+            window.location.href = 'mailto:spiritualfood@reuelfuel.site'
+                + '?subject=' + encodeURIComponent(subject)
+                + '&body=' + encodeURIComponent(body);
             document.getElementById('bible-study-success').style.display = 'block';
         });
 
